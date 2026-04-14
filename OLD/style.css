@@ -1,0 +1,239 @@
+/* ========================
+   FONTS
+======================== */
+@font-face { font-family: 'IsabellaStd'; src: url('fonts/IsabellaStd.woff2') format('woff2'); }
+@font-face { font-family: 'PPNikkeiJournal-Light'; src: url('fonts/PPNikkeiJournal-Light.woff2') format('woff2'); }
+@font-face { font-family: 'PPNikkeiJournal-LightItalic'; src: url('fonts/PPNikkeiJournal-LightItalic.woff2') format('woff2'); }
+@font-face { font-family: 'CovikSansDemo'; src: url('fonts/CovikSansDemo-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Monaako-Script'; src: url('fonts/Monaako-Script.woff2') format('woff2'); }
+
+/* ========================
+   RESET
+======================== */
+* { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0; }
+
+/* ========================
+   BODY
+======================== */
+body {
+    font-family: 'PPNikkeiJournal-Light', sans-serif;
+    background: #efe5d7;
+    color: #222;
+    line-height: 1.65;
+}
+
+/* ========================
+   HEADER
+======================== */
+.header-wrapper {
+    width: 800px;
+    max-width: 80%;
+    margin: 30px auto 0 auto;
+}
+.header-image {
+    width: 100%;
+    height: 220px;
+    display: block;
+    object-fit: cover;
+}
+
+/* ========================
+   MAIN PAGE WRAPPER
+======================== */
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 10px;
+    width: 800px;
+    max-width: 80%;
+    margin: 10px auto 0 auto;
+}
+
+/* ========================
+   SIDE PANEL
+======================== */
+.side-panel {
+    width: 149px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.block {
+    background-color: #f2ece0;
+    padding: 10px;
+}
+
+/* Sitemap block */
+.sitemap { height: 181px; }
+.sitemap h2 { margin-bottom: 5px; }
+
+/* Menu buttons */
+.menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 10px;
+}
+.menu li a {
+    display: block;
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    text-decoration: none;
+    font-family: 'CovikSansDemo', sans-serif;
+    font-size: 11px;
+    color: #222;
+    transition: color 0.3s;
+}
+.menu li a:hover { color: #665d53; }
+
+/* Changelog block */
+.changelog { flex-grow: 1; }
+
+/* ========================
+   SPECIAL TEXT (Monaako) for titles
+======================== */
+.special-text {
+    font-family: 'Monaako-Script', cursive;
+    font-size: 20pt;
+    color: #817c75;
+    text-align: center;
+    font-weight: normal;
+}
+
+/* ========================
+   PRIMARY PANEL
+======================== */
+.primary-panel {
+    width: 641px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ========================
+   WELCOME POST (.intro)
+======================== */
+.intro {
+    background-color: #f2ece0;
+    padding: 16px 45px 30px 45px;
+    position: relative;
+}
+.intro .decorative {
+    font-family: 'IsabellaStd', serif;
+    font-size: 31px;
+    color: #665d53;
+    font-weight: lighter;
+    letter-spacing: -0.07em;
+    line-height: 1.4em;
+    margin-top: 1px;
+    margin-bottom: -5px;
+    text-align: center;
+}
+.intro p:not(.quote) {
+    font-size: 13.5px;
+    letter-spacing: -0.01em;
+    line-height: 1.4em;
+    text-align: justify;
+    text-align-last: left;
+    hyphens: auto;
+    margin: 0;
+}
+.intro .corner { position: absolute; width: 45px; height: 45px; }
+.intro .corner-tl { top: 10px; left: 10px; }
+.intro .corner-tr { top: 10px; right: 10px; }
+.intro .corner-bl { bottom: 10px; left: 10px; }
+.intro .corner-br { bottom: 10px; right: 10px; }
+
+/* ========================
+   FEATURED IMAGE
+======================== */
+.featured-image img {
+    width: 100%;
+    height: 63px;
+    display: block;
+    object-fit: cover;
+}
+
+/* ========================
+   FEATURED CONTENT (Thumbnails using Grid)
+======================== */
+.featured-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 11px;
+}
+.thumb-link { display: block; width: 100%; height: 183px; }
+.thumb-link img.thumb {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border: 2px solid transparent;
+    transition: border 0.2s;
+}
+.thumb-link img.thumb:hover { border: 2px solid #665d53; }
+
+/* ========================
+   MOBILE-ONLY ELEMENTS (default hidden)
+======================== */
+.mobile-nav,
+.mobile-changelog { display: none; }
+
+/* ========================
+   RESPONSIVE ADJUSTMENTS
+======================== */
+@media (max-width: 800px) {
+
+    /* HEADER */
+    .header-wrapper { width: 95%; margin: 20px auto; }
+    .header-image { width: 100%; height: auto; object-fit: contain; }
+
+    /* PAGE WRAPPER → stack */
+    .page-wrapper { flex-direction: column; width: 95%; margin: 10px auto; }
+
+    /* SIDE PANEL hidden */
+    .side-panel { display: none; }
+
+    /* PRIMARY PANEL full width */
+    .primary-panel { width: 100%; }
+
+    /* MOBILE NAVBAR visible & styled */
+    .mobile-nav {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 10px auto;
+        padding: 6px 10px;
+        background-color: #f2ece0;
+        border-radius: 6px;
+        font-family: 'CovikSansDemo', sans-serif;
+        font-size: 12px;
+        text-align: center;
+    }
+    .mobile-nav a {
+        text-decoration: none;
+        color: #222;
+        transition: color 0.3s;
+    }
+    .mobile-nav a:hover { color: #665d53; }
+
+    /* FEATURED IMAGE scaling */
+    .featured-image img { height: auto; object-fit: contain; }
+
+    /* FEATURED CONTENT → stacked instead of grid */
+    .featured-content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* MOBILE changelog visible */
+    .mobile-changelog { display: block; margin-top: 10px; }
+    .desktop-changelog { display: none; }
+}

@@ -1,0 +1,345 @@
+/* ========================
+   FONTS (use your local font files - unchanged)
+   ======================== */
+@font-face {
+  font-family: 'IsabellaStd';
+  src: url('fonts/IsabellaStd.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'PPNikkeiJournal-Light';
+  src: url('fonts/PPNikkeiJournal-Light.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'PPNikkeiJournal-LightItalic';
+  src: url('fonts/PPNikkeiJournal-LightItalic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'CovikSansDemo';
+  src: url('fonts/CovikSansDemo-Regular.woff2') format('woff2');
+}
+
+/* ========================
+   RESET + base
+   ======================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html,body { height: 100%; }
+body {
+  font-family: 'PPNikkeiJournal-Light', sans-serif;
+  background: #efe5d7;
+  color: #222;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================
+   SITE OUTER (centering & top margin)
+   This block represents the centered content area:
+   Visual reference: 1440px canvas with left/right margins of 320px,
+   so content width = 800px. Use min() to be flexible.
+   ======================== */
+.site-outer {
+  width: min(800px, 92%); /* 800px on desktop, smaller on narrow screens */
+  margin: 30px auto 40px; /* top margin = 30px per your spec */
+}
+
+/* ========================
+   HEADER
+   header height: 220px (from spec) — flexible if image smaller
+   ======================== */
+.site-header { width: 100%; margin-bottom: 10px; /* gap between header and panels */ }
+.header-image {
+  display: block;
+  width: 100%;
+  height: 220px;            /* desktop visual target */
+  object-fit: cover;
+}
+
+/* ========================
+   PANELS WRAPPER
+   Panels sit under header, widths match spec: 149px + 10px gap + 641px = 800px
+   Both panels must be same height (526px).
+   ======================== */
+.panels-wrapper {
+  display: flex;
+  gap: 10px;               /* gap between panels (10px per spec) */
+  align-items: stretch;    /* ensures equal height for children */
+  width: 100%;
+  min-height: 526px;       /* desktop visual target */
+}
+
+/* SIDE PANEL (left) */
+.side-panel {
+  width: 149px;            /* per spec */
+  min-height: 526px;       /* match primary height */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;               /* space between blocks: sitemap / changelog = 10px */
+}
+
+/* PRIMARY PANEL (right) */
+.primary-panel {
+  width: calc(100% - 149px - 10px); /* fill remaining width in the 800px container */
+  min-height: 526px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* vertical spacing between stacked blocks */
+}
+
+/* Generic block styling (applies to most of the rectangular blocks) */
+.block {
+  background-color: #f2ece0;
+  border-radius: 4px;
+  padding: 0; /* many blocks have their own internal spacing rules */
+  position: relative;
+}
+
+/* ========================
+   SITEMAP BLOCK (side panel top)
+   Dimensions: W 149px H 181px
+   Important spacing details implemented below.
+   ======================== */
+.sitemap-block {
+  width: 149px;
+  height: 181px;
+  padding-top: 0; /* We'll position title and buttons with margins below */
+  display: block;
+}
+
+/* Title styling inside blocks (shared) */
+.block-title {
+  font-family: 'IsabellaStd', serif;
+  font-size: 26px;           /* Illustrator 26pt reference */
+  color: #817c75;            /* exact color from your spec */
+  text-align: center;
+  margin-top: 36px;          /* distance from top of block to bottom of title (~36px to bottom-of-title per spec) */
+  margin-bottom: 15px;       /* distance from bottom of title to first button (15px per spec) */
+  line-height: 1;
+}
+
+/* Navigation buttons list layout */
+.sitemap-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;                 /* button margin between items = 5px */
+  align-items: flex-start;  /* we'll add left offset for buttons */
+  padding-left: 10px;       /* left margin between Sitemap block and left edge of buttons = 10px */
+  padding-right: 10px;      /* right margin between buttons and right edge = 10px */
+}
+
+/* Individual button size: 129x20 */
+.sitemap-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 129px;
+  height: 20px;
+  text-decoration: none;
+  font-family: 'CovikSansDemo', sans-serif;
+  color: #222;
+  background: transparent;
+  border: 1px solid transparent;
+  font-size: 12px;
+  letter-spacing: 0;
+  transition: color 0.2s, background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+/* optional hover visual for sitemap buttons */
+.sitemap-btn:hover {
+  color: #665d53;
+  border-color: rgba(102,93,83,0.15);
+  background: rgba(0,0,0,0.01);
+}
+
+/* bottom spacing: ensure at least 10px from last button to bottom of Sitemap block */
+.sitemap-nav {
+  display: block;
+  padding-bottom: 10px;  /* bottom margin inside block */
+}
+
+/* ========================
+   CHANGELOG BLOCK (side panel bottom)
+   Dimensions: W 149px H 335px, title distance top->bottom=36px per spec
+   ======================== */
+.changelog-block {
+  width: 149px;
+  height: 335px;
+  padding: 0 10px 10px 10px; /* small inner padding for content area */
+  overflow: auto;            /* in case changelog becomes long later */
+}
+.changelog-block .block-title {
+  margin-top: 36px;   /* distance from top to bottom of title per spec */
+  margin-bottom: 0;
+}
+
+/* Placeholder content area for changelog - currently empty per your note */
+.changelog-content {
+  margin-top: 12px;
+  min-height: calc(100% - 36px - 12px); /* filler space */
+}
+
+/* ========================
+   WELCOME BLOCK (primary top)
+   Dimensions: W 641px H 260px
+   Content should match current site's intro exactly
+   ======================== */
+.welcome-block {
+  width: 100%;
+  min-height: 260px;
+  padding: 16px 45px 30px 45px; /* mirrored from your old CSS */
+  background-color: #f2ece0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* decorative title inside welcome block */
+.welcome-block .decorative {
+  font-family: 'IsabellaStd', serif;
+  font-size: 31px;
+  color: #665d53;
+  font-weight: normal;
+  letter-spacing: -0.07em;
+  line-height: 1.4em;
+  margin-top: 7px;
+  margin-bottom: -5px;
+  text-align: center;
+}
+
+/* intro paragraph(s) */
+.welcome-block p:not(.intro-quote) {
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  line-height: 1.4em;
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
+  margin: 0;
+}
+
+/* quote styling */
+.intro-quote {
+  display: block;
+  width: 100%;
+  text-align: center !important;
+  font-family: 'PPNikkeiJournal-Light', sans-serif;
+  font-size: 12px;
+  color: #827c75;
+  letter-spacing: -0.03em;
+  line-height: 1.2em;
+  margin: 10px 0 12px 0;
+}
+
+/* decorative corner images inside the welcome block */
+.welcome-block .corner {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+}
+.corner-tl { top: 10px; left: 10px; }
+.corner-tr { top: 10px; right: 10px; }
+.corner-bl { bottom: 10px; left: 10px; }
+.corner-br { bottom: 10px; right: 10px; }
+
+/* ========================
+   FEATURED BANNER IMAGE
+   Dimensions: W 641px H 63px — this is just an image block (no padding)
+   ======================== */
+.featured-banner {
+  width: 100%;
+  height: 63px;
+  display: block;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.featured-banner .featured-image {
+  display: block;
+  width: 100%;
+  height: 63px;
+  object-fit: cover;
+}
+
+/* ========================
+   FEATURED CONTENT (two thumbnails side by side)
+   Each: W 315px H 183px, gap between them = 11px
+   ======================== */
+.featured-content {
+  display: flex;
+  gap: 11px;            /* gap between the two thumbnails per spec */
+  width: 100%;
+  justify-content: space-between;
+}
+.thumb-link {
+  width: 315px;
+  height: 183px;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 4px;
+  text-decoration: none;
+  position: relative;
+  border: 1px solid transparent; /* for hover outline transition */
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.thumb-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Hover effect: thin visible border only on hover */
+.thumb-link:hover {
+  border-color: #665d53;
+  box-shadow: 0 0 0 2px rgba(102,93,83,0.04);
+}
+
+/* ========================
+   Accessibility + minor utilities
+   ======================== */
+a { color: inherit; }
+img { display: block; }
+
+/* ========================
+   RESPONSIVE: adapt to narrower windows
+   - At widths below ~860px, stack panels vertically and allow full-width content
+   - Side panel is hidden at very small widths (toggleable later)
+   ======================== */
+@media (max-width: 900px) {
+  .site-outer { width: 92%; margin-top: 20px; }
+  .header-image { height: auto; max-height: 220px; }
+
+  .panels-wrapper {
+    flex-direction: column;
+    gap: 1rem;
+    min-height: auto;
+  }
+
+  .side-panel { display: none; } /* hide for mobile by default (you can change this) */
+
+  .primary-panel {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .welcome-block { padding: 14px 18px 22px 18px; }
+  .welcome-block .decorative { font-size: 26px; }
+
+  .featured-banner .featured-image { height: auto; }
+  .featured-content {
+    gap: 10px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .thumb-link { width: 100%; height: auto; aspect-ratio: 16 / 9; }
+  .thumb-img { height: 100%; }
+}
+
+/* Very small screens: ensure thumb images are readable */
+@media (max-width: 420px) {
+  .welcome-block .decorative { font-size: 20px; }
+  .sitemap-btn { transform: scale(0.95); transform-origin: left top; }
+}
