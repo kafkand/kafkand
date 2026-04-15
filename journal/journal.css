@@ -1,11 +1,11 @@
 /* ============================================================
    JOURNAL.CSS — Styles for journal/journal.html
    Sections:
-   1. SIDE PANEL BLOCKS
-   2. TAG FILTER BUTTONS (sidebar)
-   3. SIDE PANEL POST LISTS (Recent + Featured)
+   1. JOURNAL NAV BAR
+   2. TAG FILTER BUTTONS (nav bar)
+   3. JOURNAL WRAPPER (single panel)
    4. POST PREVIEW ITEMS (layout)
-   5. POST THUMBNAIL
+   5. POST THUMBNAIL — slide animation
    6. POST BODY TEXT
    7. POST FOOTER (Read More + tags)
    8. POST TAG BUTTONS (on cards)
@@ -15,45 +15,66 @@
 
 
 /* ============================================================
-   1. SIDE PANEL BLOCKS
-   Overrides the base .block padding for journal sidebar menus
+   1. JOURNAL NAV BAR
 ============================================================ */
 
-.journal-side-block {
-    padding: 8px 10px 12px 10px;
+.journal-nav-wrapper {
+    width: 800px;
+    max-width: 80%;
+    margin: 8px auto 0 auto;
 }
 
-.journal-side-block .special-text {
-    font-size: 16pt;
-    margin-bottom: 6px;
+.journal-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f1ebdf;
+    padding: 5px 10px;
+    flex-wrap: wrap;
+}
+
+.journal-nav-home {
+    font-family: 'CovikSansDemo', sans-serif;
+    font-size: 11px;
+    color: #49443e;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.journal-nav-home:hover {
+    color: #665d53;
+}
+
+.journal-nav-divider {
+    width: 1px;
+    height: 14px;
+    background-color: #d1c8ba;
+    flex-shrink: 0;
+}
+
+.tag-filter-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
 }
 
 
 /* ============================================================
-   2. TAG FILTER BUTTONS (sidebar)
-   <button> elements in the Tags block — toggle filtering on/off
+   2. TAG FILTER BUTTONS (nav bar)
 ============================================================ */
 
-.tag-filter-list {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 0 2px;
-}
-
 .tag-filter-btn {
-    display: block;
-    width: 100%;
-    padding: 3px 6px;
+    padding: 2px 8px;
     background: transparent;
     border: 1px solid #d1c8ba;
-    border-radius: 4px;
+    border-radius: 3px;
     font-family: 'CovikSansDemo', sans-serif;
     font-size: 11px;
     color: #49443e;
-    text-align: left;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    white-space: nowrap;
 }
 
 .tag-filter-btn:hover {
@@ -61,7 +82,6 @@
     border-color: #665d53;
 }
 
-/* Active = currently filtering by this tag */
 .tag-filter-btn.active {
     background-color: #d83e12;
     color: #f1ebdf;
@@ -70,71 +90,97 @@
 
 
 /* ============================================================
-   3. SIDE PANEL POST LISTS
-   Used by Recent and Featured blocks
+   3. JOURNAL WRAPPER (single panel)
+   overflow: visible is CRITICAL — allows thumbnail to bleed
+   left into the page margin during the slide animation.
 ============================================================ */
 
-.side-post-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.journal-wrapper {
+    width: 800px;
+    max-width: 80%;
+    margin: 8px auto 40px auto;
     display: flex;
     flex-direction: column;
-    gap: 5px;
-}
-
-.side-post-list li a {
-    display: block;
-    font-family: 'CovikSansDemo', sans-serif;
-    font-size: 11px;
-    color: #49443e;
-    text-decoration: none;
-    line-height: 1.4em;
-    transition: color 0.2s;
-}
-
-.side-post-list li a:hover {
-    color: #665d53;
+    gap: 8px;
+    overflow: visible;
 }
 
 
 /* ============================================================
    4. POST PREVIEW ITEMS (layout)
-   Each post is a horizontal row: thumbnail left, content right
+   Fixed 200px height on desktop.
+   overflow: visible so thumbnail can bleed left on hover.
 ============================================================ */
 
 .post-item {
     display: flex;
     flex-direction: row;
     background-color: #f1ebdf;
-    border-radius: 4px;
-    overflow: hidden;
     width: 100%;
+    height: 200px;
+    overflow: visible;
+    position: relative;
 }
 
 
 /* ============================================================
-   5. POST THUMBNAIL
+   5. POST THUMBNAIL — slide animation
+
+   HOW IT WORKS:
+   - Container is 155px wide (the visible "window")
+   - On hover, margin-left goes -95px AND width grows by 95px
+   - Right edge (the seam) never moves — it's pure math
+   - object-position: left center keeps the left portion always visible
+
+   TWEAK GUIDE:
+   - --thumb-visible: default visible width
+   - --thumb-hidden: slide distance (hidden portion)
+   - transition duration: currently 0.65s
 ============================================================ */
 
-.post-thumb-link {
+.post-thumb-container {
+    --thumb-visible: 155px;
+    --thumb-hidden: 95px;
+
     flex-shrink: 0;
-    width: 180px;
-    display: block;
+    width: var(--thumb-visible);
+    height: 100%;
+    margin-left: 0;
     overflow: hidden;
-    align-self: stretch;   /* stretches to match the full post block height */
+    transition:
+        width 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        margin-left 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.post-item:hover .post-thumb-container {
+    margin-left: calc(-1 * var(--thumb-hidden));
+    width: calc(var(--thumb-visible) + var(--thumb-hidden));
+}
+
+.post-thumb-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* picture element must also fill the container */
+.post-thumb-link picture {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .post-thumb {
     width: 100%;
-    height: 100%;          /* now fills the stretched container */
-    object-fit: cover;     /* covers without distorting — necessary since height is forced */
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
     display: block;
     transition: opacity 0.2s;
 }
 
 .post-thumb-link:hover .post-thumb {
-    opacity: 0.88;
+    opacity: 0.92;
 }
 
 
@@ -147,7 +193,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 14px 16px 14px 16px;
+    padding: 14px 16px;
+    overflow: hidden;
+    min-width: 0;
 }
 
 .post-title {
@@ -158,6 +206,10 @@
     line-height: 1.3em;
     color: #49443e;
     margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .post-excerpt {
@@ -168,6 +220,10 @@
     color: #49443e;
     flex-grow: 1;
     margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 
@@ -181,6 +237,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 6px;
+    flex-shrink: 0;
 }
 
 .read-more {
@@ -197,7 +254,6 @@
 
 /* ============================================================
    8. POST TAG BUTTONS (on cards)
-   Interactive — clicking triggers the same filter as sidebar tags
 ============================================================ */
 
 .post-tags {
@@ -225,7 +281,6 @@
     border-color: #665d53;
 }
 
-/* Active = matches a currently selected filter tag */
 .post-tag-btn.active {
     background-color: #d83e12;
     color: #f1ebdf;
@@ -248,24 +303,96 @@
 
 /* ============================================================
    10. RESPONSIVE / MOBILE
+   - Post blocks stack vertically: mobile thumbnail on top, text below
+   - Mobile thumbnail is a separate image (thumb*-mobile.jpg) designed
+     for a wide/short 375x85 ratio — loaded via <picture> element
+   - Slide animation is disabled entirely on mobile
+   - Nav bar shows tags only (Home link hidden)
 ============================================================ */
 
 @media (max-width: 800px) {
 
+    /* NAV */
+    .journal-nav-wrapper {
+        width: 100%;
+        max-width: 100%;
+        margin: 6px auto 0 auto;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    .journal-nav {
+        gap: 4px;
+        padding: 5px 8px;
+    }
+
+    .journal-nav-home,
+    .journal-nav-divider {
+        display: none;
+    }
+
+    /* WRAPPER */
+    .journal-wrapper {
+        width: 100%;
+        max-width: 100%;
+        margin: 6px auto 20px auto;
+        padding: 0 10px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* POST ITEM: stack vertically, auto height */
     .post-item {
         flex-direction: column;
+        height: auto;
+        overflow: hidden;
     }
 
-    .post-thumb-link {
+    /* THUMBNAIL CONTAINER: full width, fixed 85px height */
+    .post-thumb-container {
         width: 100%;
+        height: 85px;
+        margin-left: 0;
+        overflow: hidden;
+        /* disable slide transition on mobile */
+        transition: none;
     }
 
+    /* Disable hover slide on mobile */
+    .post-item:hover .post-thumb-container {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    /* Thumbnail fills container, centered crop for the wide/short mobile image */
     .post-thumb {
         width: 100%;
-        height: auto;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
     }
 
+    /* TAP FEEDBACK: brief opacity dip (no slide) */
+    .post-item.thumb-revealed .post-thumb {
+        opacity: 0.75;
+        transition: opacity 0.3s;
+    }
+
+    /* TEXT AREA */
     .post-body {
         padding: 12px;
+        /* fixed height for text area to match your 130px spec */
+        min-height: 130px;
     }
+
+    .post-title {
+        -webkit-line-clamp: 2;
+        font-size: 15px;
+    }
+
+    .post-excerpt {
+        -webkit-line-clamp: 3;
+        font-size: 12px;
+    }
+
 }

@@ -14,125 +14,102 @@
         <img src="../images/header-image.jpg" alt="Site banner" class="header-image">
     </div>
 
-    <!-- MOBILE NAVBAR -->
-    <nav class="mobile-nav">
-        <a href="../index.html">Home</a>
-        <a href="journal.html">Journal</a>
-        <a href="../museum/closed-museum.html">Museum</a>
-        <a href="#">The Gallery</a>
-        <a href="#">Archive</a>
-        <a href="#">About</a>
-    </nav>
-
-    <!-- MAIN PAGE WRAPPER -->
-    <div class="page-wrapper">
-
-        <!-- SIDE PANEL -->
-        <aside class="side-panel">
-
-            <!-- TAGS BLOCK -->
-            <div class="block journal-side-block">
-                <h2 class="special-text">Tags</h2>
-                <div class="tag-filter-list">
-                    <button class="tag-filter-btn" data-tag="roundup">Roundup</button>
-                    <button class="tag-filter-btn" data-tag="hater-at-large">Hater At Large</button>
-                    <button class="tag-filter-btn" data-tag="review">Review</button>
-                    <button class="tag-filter-btn" data-tag="art">Art</button>
-                    <button class="tag-filter-btn" data-tag="music">Music</button>
-                </div>
+    <!-- JOURNAL NAV BAR (tag filters + home button) -->
+    <div class="journal-nav-wrapper">
+        <nav class="journal-nav">
+            <a href="../index.html" class="journal-nav-home">Home</a>
+            <div class="journal-nav-divider"></div>
+            <div class="tag-filter-list">
+                <button class="tag-filter-btn" data-tag="roundup">Roundup</button>
+                <button class="tag-filter-btn" data-tag="hater-at-large">Hater At Large</button>
+                <button class="tag-filter-btn" data-tag="review">Review</button>
+                <button class="tag-filter-btn" data-tag="art">Art</button>
+                <button class="tag-filter-btn" data-tag="music">Music</button>
+                <button class="tag-filter-btn" data-tag="recent">Recent</button>
+                <button class="tag-filter-btn" data-tag="featured">Featured</button>
             </div>
-
-            <!-- RECENT BLOCK -->
-            <div class="block journal-side-block">
-                <h2 class="special-text">Recent</h2>
-                <ul class="side-post-list">
-                    <li><a href="posts/post1.html">October Roundup</a></li>
-                    <li><a href="#">Pokémon Legends: Z-A is gay and dumb</a></li>
-                    <li><a href="#">You Should Probably Kill The Paddington Bear In Your Head</a></li>
-                </ul>
-            </div>
-
-            <!-- FEATURED BLOCK -->
-            <div class="block journal-side-block">
-                <h2 class="special-text">Featured</h2>
-                <ul class="side-post-list">
-                    <li><a href="posts/post1.html">October Roundup</a></li>
-                </ul>
-            </div>
-
-        </aside>
-
-        <!-- PRIMARY PANEL -->
-        <main class="primary-panel">
-
-            <!-- NO RESULTS MESSAGE (hidden by default, shown by JS when no tags match) -->
-            <p class="no-results" id="no-results" style="display:none;">No posts match the selected tags.</p>
-
-            <!-- POST: October Roundup -->
-            <article class="post-item" data-tags="roundup">
-                <a href="posts/post1.html" class="post-thumb-link">
-                    <img src="../images/thumb3.jpg" alt="October Roundup" class="post-thumb">
-                </a>
-                <div class="post-body">
-                    <h2 class="post-title">October Roundup</h2>
-                    <p class="post-excerpt">A collection of all my favorite things this month, including friends, songs, a single movie, and more. This is a (mostly) fake journal entry.</p>
-                    <div class="post-footer">
-                        <a href="posts/post1.html" class="read-more">Read More →</a>
-                        <div class="post-tags">
-                            <button class="post-tag-btn" data-tag="roundup">Roundup</button>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- POST: Pokemon -->
-            <article class="post-item" data-tags="hater-at-large,review">
-                <a href="#" class="post-thumb-link">
-                    <img src="../images/thumb4.jpg" alt="Pokemon post" class="post-thumb">
-                </a>
-                <div class="post-body">
-                    <h2 class="post-title">Pokémon Legends: Z-A is gay and dumb</h2>
-                    <p class="post-excerpt">Pokémon has released its gayest and dumbest title yet. And as a gay, dumb person, I kinda like it! Kinda. This is a fake journal entry.</p>
-                    <div class="post-footer">
-                        <a href="#" class="read-more">Don't Read More →</a>
-                        <div class="post-tags">
-                            <button class="post-tag-btn" data-tag="hater-at-large">Hater At Large</button>
-                            <button class="post-tag-btn" data-tag="review">Review</button>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- POST: Paddington -->
-            <article class="post-item" data-tags="hater-at-large">
-                <a href="#" class="post-thumb-link">
-                    <img src="../images/thumb5.jpg" alt="Paddington post" class="post-thumb">
-                </a>
-                <div class="post-body">
-                    <h2 class="post-title">You Should Probably Kill The Paddington Bear In Your Head</h2>
-                    <p class="post-excerpt">Has a decade of "Shh, let people enjoy things" made us dumber? (Yes). This is a fake journal entry.</p>
-                    <div class="post-footer">
-                        <a href="#" class="read-more">Don't Read More →</a>
-                        <div class="post-tags">
-                            <button class="post-tag-btn" data-tag="hater-at-large">Hater At Large</button>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-        </main>
+        </nav>
     </div>
 
-    <!-- ============================================================
-         TAG FILTERING SCRIPT
-         How it works:
-         - Each post has data-tags="tag1,tag2" attributes
-         - Sidebar buttons and post tag buttons both call toggleTag()
-         - activeTags (a Set) tracks what's currently selected
-         - filterPosts() hides/shows posts based on active tags
-         - AND logic: post must match ALL active tags to be visible
-    ============================================================ -->
+    <!-- POST LIST -->
+    <div class="journal-wrapper">
+
+        <!-- NO RESULTS MESSAGE -->
+        <p class="no-results" id="no-results" style="display:none;">No posts match the selected tags.</p>
+
+        <!-- POST: October Roundup -->
+        <article class="post-item" data-tags="roundup,recent,featured">
+            <div class="post-thumb-container">
+                <a href="posts/post1.html" class="post-thumb-link">
+                    <!-- picture: mobile loads thumb3-mobile.jpg, desktop loads thumb3.jpg -->
+                    <picture>
+                        <source media="(max-width: 800px)" srcset="../images/thumb3-mobile.jpg">
+                        <img src="../images/thumb3.jpg" alt="October Roundup" class="post-thumb">
+                    </picture>
+                </a>
+            </div>
+            <div class="post-body">
+                <h2 class="post-title">October Roundup</h2>
+                <p class="post-excerpt">A collection of all my favorite things this month, including friends, songs, a single movie, and more. This is a (mostly) fake journal entry.</p>
+                <div class="post-footer">
+                    <a href="posts/post1.html" class="read-more">Read More →</a>
+                    <div class="post-tags">
+                        <button class="post-tag-btn" data-tag="roundup">Roundup</button>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- POST: Pokemon -->
+        <article class="post-item" data-tags="hater-at-large,review">
+            <div class="post-thumb-container">
+                <a href="#" class="post-thumb-link">
+                    <picture>
+                        <source media="(max-width: 800px)" srcset="../images/thumb4-mobile.jpg">
+                        <img src="../images/thumb4.jpg" alt="Pokemon post" class="post-thumb">
+                    </picture>
+                </a>
+            </div>
+            <div class="post-body">
+                <h2 class="post-title">Pokémon Legends: Z-A is gay and dumb</h2>
+                <p class="post-excerpt">Pokémon has released its gayest and dumbest title yet. And as a gay, dumb person, I kinda like it! Kinda. This is a fake journal entry.</p>
+                <div class="post-footer">
+                    <a href="#" class="read-more">Don't Read More →</a>
+                    <div class="post-tags">
+                        <button class="post-tag-btn" data-tag="hater-at-large">Hater At Large</button>
+                        <button class="post-tag-btn" data-tag="review">Review</button>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- POST: Paddington -->
+        <article class="post-item" data-tags="hater-at-large">
+            <div class="post-thumb-container">
+                <a href="#" class="post-thumb-link">
+                    <picture>
+                        <source media="(max-width: 800px)" srcset="../images/thumb5-mobile.jpg">
+                        <img src="../images/thumb5.jpg" alt="Paddington post" class="post-thumb">
+                    </picture>
+                </a>
+            </div>
+            <div class="post-body">
+                <h2 class="post-title">You Should Probably Kill The Paddington Bear In Your Head</h2>
+                <p class="post-excerpt">Has a decade of "Shh, let people enjoy things" made us dumber? (Yes). This is a fake journal entry.</p>
+                <div class="post-footer">
+                    <a href="#" class="read-more">Don't Read More →</a>
+                    <div class="post-tags">
+                        <button class="post-tag-btn" data-tag="hater-at-large">Hater At Large</button>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
     <script>
+
+        // ── TAG FILTERING ──────────────────────────────────────────
         const filterButtons = document.querySelectorAll('.tag-filter-btn');
         const postTagButtons = document.querySelectorAll('.post-tag-btn');
         const postItems = document.querySelectorAll('.post-item');
@@ -146,8 +123,6 @@
             } else {
                 activeTags.add(tag);
             }
-
-            // Sync visual state across ALL buttons sharing this tag
             filterButtons.forEach(btn => {
                 if (btn.dataset.tag === tag) {
                     btn.classList.toggle('active', activeTags.has(tag));
@@ -158,24 +133,20 @@
                     btn.classList.toggle('active', activeTags.has(tag));
                 }
             });
-
             filterPosts();
         }
 
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => toggleTag(btn.dataset.tag));
         });
-
         postTagButtons.forEach(btn => {
             btn.addEventListener('click', () => toggleTag(btn.dataset.tag));
         });
 
         function filterPosts() {
             let visibleCount = 0;
-
             postItems.forEach(post => {
                 const postTags = post.dataset.tags.split(',');
-
                 if (activeTags.size === 0) {
                     post.style.display = '';
                     visibleCount++;
@@ -185,9 +156,32 @@
                     if (matches) visibleCount++;
                 }
             });
-
             noResults.style.display = visibleCount === 0 ? 'block' : 'none';
         }
+
+        // ── MOBILE TAP FEEDBACK ────────────────────────────────────
+        // No slide animation on mobile — just a brief opacity dip
+        // before navigating to the post link
+        const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+        if (isTouchDevice) {
+            postItems.forEach(post => {
+                const link = post.querySelector('.post-thumb-link');
+                const href = link ? link.getAttribute('href') : null;
+
+                post.addEventListener('click', (e) => {
+                    if (e.target.closest('.post-tag-btn')) return;
+                    post.classList.add('thumb-revealed');
+                    if (href && href !== '#') {
+                        e.preventDefault();
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 300);
+                    }
+                });
+            });
+        }
+
     </script>
 
 </body>
