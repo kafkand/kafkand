@@ -1,205 +1,271 @@
-/* ========================
-   SITE LOGO (centered above side panel)
-======================== */
-.journal-logo-wrapper {
+/* ============================================================
+   JOURNAL.CSS — Styles for journal/journal.html
+   Sections:
+   1. SIDE PANEL BLOCKS
+   2. TAG FILTER BUTTONS (sidebar)
+   3. SIDE PANEL POST LISTS (Recent + Featured)
+   4. POST PREVIEW ITEMS (layout)
+   5. POST THUMBNAIL
+   6. POST BODY TEXT
+   7. POST FOOTER (Read More + tags)
+   8. POST TAG BUTTONS (on cards)
+   9. NO RESULTS MESSAGE
+   10. RESPONSIVE / MOBILE
+============================================================ */
+
+
+/* ============================================================
+   1. SIDE PANEL BLOCKS
+   Overrides the base .block padding for journal sidebar menus
+============================================================ */
+
+.journal-side-block {
+    padding: 8px 10px 12px 10px;
+}
+
+.journal-side-block .special-text {
+    font-size: 16pt;
+    margin-bottom: 6px;
+}
+
+
+/* ============================================================
+   2. TAG FILTER BUTTONS (sidebar)
+   <button> elements in the Tags block — toggle filtering on/off
+============================================================ */
+
+.tag-filter-list {
     display: flex;
-    justify-content: center;   /* centers horizontally */
-    margin-top: 20px;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 2px;
 }
 
-.journal-logo-wrapper .site-logo img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-}
-
-/* ========================
-   BANNER (centered above primary panel)
-======================== */
-.journal-banner-wrapper {
-    display: flex;
-    justify-content: center;   /* centers horizontally */
-    margin: 15px auto;         /* space between logo and banner */
-    max-width: 1000px;         /* matches journal layout width */
-}
-
-.journal-banner-wrapper .journal-banner {
-    width: 100%;               /* stretches to match primary panel width */
-    max-width: 800px;          /* max same as primary panel */
-    height: auto;              /* maintain aspect ratio */
-}
-
-/* ========================
-   JOURNAL LAYOUT
-======================== */
-.journal-layout {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 25px;
-    width: 1000px;
-    max-width: 90%;
-    margin: 20px auto 0 auto; /* slightly less margin to fit with header */
-}
-
-/* Side panel remains narrow */
-.journal-layout .side-panel {
-    width: 180px;
-    flex-shrink: 0;
-}
-
-/* Primary panel takes the rest */
-.journal-layout .primary-panel {
-    flex-grow: 1;
-    max-width: 800px;
-}
-
-/* Tag and recent blocks */
-.tag-list, .recent-list {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 5px;
-}
-
-.tag-list li a, .recent-list li a {
+.tag-filter-btn {
     display: block;
-    text-decoration: none;
-    font-size: 12px;
-    color: #222;
-    padding: 3px 0;
-    transition: color 0.3s;
+    width: 100%;
+    padding: 3px 6px;
+    background: transparent;
+    border: 1px solid #d1c8ba;
+    border-radius: 4px;
+    font-family: 'CovikSansDemo', sans-serif;
+    font-size: 11px;
+    color: #49443e;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.tag-list li a:hover, .recent-list li a:hover {
+.tag-filter-btn:hover {
+    color: #665d53;
+    border-color: #665d53;
+}
+
+/* Active = currently filtering by this tag */
+.tag-filter-btn.active {
+    background-color: #d83e12;
+    color: #f1ebdf;
+    border-color: #d83e12;
+}
+
+
+/* ============================================================
+   3. SIDE PANEL POST LISTS
+   Used by Recent and Featured blocks
+============================================================ */
+
+.side-post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.side-post-list li a {
+    display: block;
+    font-family: 'CovikSansDemo', sans-serif;
+    font-size: 11px;
+    color: #49443e;
+    text-decoration: none;
+    line-height: 1.4em;
+    transition: color 0.2s;
+}
+
+.side-post-list li a:hover {
     color: #665d53;
 }
 
-/* Center the whole pair visually */
-@media (min-width: 1000px) {
-    .journal-layout {
-        justify-content: center;
-    }
-}
 
-/* Responsive fallback */
-@media (max-width: 800px) {
-    .journal-layout {
-        flex-direction: column;
-        width: 90%;
-    }
-
-    .journal-layout .side-panel {
-        width: 100%;
-        order: 2;
-    }
-
-    .journal-layout .primary-panel {
-        width: 100%;
-        order: 1;
-    }
-
-    .journal-banner-wrapper,
-    .journal-logo-wrapper {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .journal-banner-wrapper .journal-banner {
-        height: 50px;
-    }
-
-    .journal-logo-wrapper .site-logo img {
-        width: 50px;
-        height: 50px;
-    }
-}
-
-/* ========================
-   POST GRID
-======================== */
-.post-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-}
+/* ============================================================
+   4. POST PREVIEW ITEMS (layout)
+   Each post is a horizontal row: thumbnail left, content right
+============================================================ */
 
 .post-item {
-    background-color: #fffefc;
-    padding: 12px 15px;
-    border-radius: 6px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: row;
+    background-color: #f1ebdf;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 100%;
+}
+
+
+/* ============================================================
+   5. POST THUMBNAIL
+============================================================ */
+
+.post-thumb-link {
+    flex-shrink: 0;
+    width: 180px;
+    display: block;
+    overflow: hidden;
+    align-self: stretch;   /* stretches to match the full post block height */
+}
+
+.post-thumb {
+    width: 100%;
+    height: 100%;          /* now fills the stretched container */
+    object-fit: cover;     /* covers without distorting — necessary since height is forced */
+    display: block;
+    transition: opacity 0.2s;
+}
+
+.post-thumb-link:hover .post-thumb {
+    opacity: 0.88;
+}
+
+
+/* ============================================================
+   6. POST BODY TEXT
+============================================================ */
+
+.post-body {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
+    padding: 14px 16px 14px 16px;
 }
 
-.post-item img.thumb {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-
-.post-item h2.decorative {
-    font-size: 18pt;
-    margin: 0 0 8px 0;
-}
-
-.post-item .excerpt {
-    font-size: 13.5px;
-    line-height: 1.4em;
+.post-title {
+    font-family: 'PPNikkeiJournal-Regular', sans-serif;
+    font-size: 17px;
+    font-weight: normal;
+    letter-spacing: 0.01em;
+    line-height: 1.3em;
+    color: #49443e;
     margin-bottom: 8px;
 }
 
-.post-item .read-more {
-    font-size: 12px;
-    color: #665d53;
-    text-decoration: none;
-    font-family: 'CovikSansDemo', sans-serif;
+.post-excerpt {
+    font-family: 'PPNikkeiJournal-Light', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    line-height: 1.45em;
+    color: #49443e;
+    flex-grow: 1;
+    margin-bottom: 10px;
 }
 
-.post-item .read-more:hover {
-    text-decoration: underline;
-}
 
-/* ========================
-   POST FOOTER (Read More + Tags)
-======================== */
+/* ============================================================
+   7. POST FOOTER (Read More + tags row)
+============================================================ */
+
 .post-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 8px;
-    flex-wrap: wrap; /* allows tags to wrap if needed */
+    flex-wrap: wrap;
+    gap: 6px;
 }
 
-.post-footer .read-more {
-    font-size: 12px;
+.read-more {
+    font-family: 'CovikSansDemo', sans-serif;
+    font-size: 11px;
     color: #665d53;
     text-decoration: none;
-    font-family: 'CovikSansDemo', sans-serif;
 }
 
-.post-footer .read-more:hover {
+.read-more:hover {
     text-decoration: underline;
 }
 
-/* Tags styling */
-.post-footer .post-tags a {
-    display: inline-block;
-    background-color: #f2ece0;
-    color: #222;
-    font-size: 11px;
-    font-family: 'CovikSansDemo', sans-serif;
-    text-decoration: none;
-    padding: 2px 6px;
-    border-radius: 4px;
-    margin-left: 4px;
-    transition: background-color 0.2s, color 0.2s;
+
+/* ============================================================
+   8. POST TAG BUTTONS (on cards)
+   Interactive — clicking triggers the same filter as sidebar tags
+============================================================ */
+
+.post-tags {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
 }
 
-.post-footer .post-tags a:hover {
-    background-color: #665d53;
-    color: #fff;
+.post-tag-btn {
+    display: inline-block;
+    background-color: #eee4d6;
+    color: #49443e;
+    font-family: 'CovikSansDemo', sans-serif;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    border: 1px solid #d1c8ba;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.post-tag-btn:hover {
+    background-color: #d1c8ba;
+    color: #49443e;
+    border-color: #665d53;
+}
+
+/* Active = matches a currently selected filter tag */
+.post-tag-btn.active {
+    background-color: #d83e12;
+    color: #f1ebdf;
+    border-color: #d83e12;
+}
+
+
+/* ============================================================
+   9. NO RESULTS MESSAGE
+============================================================ */
+
+.no-results {
+    font-family: 'PPNikkeiJournal-Light', sans-serif;
+    font-size: 13px;
+    color: #817c75;
+    text-align: center;
+    padding: 30px 0;
+}
+
+
+/* ============================================================
+   10. RESPONSIVE / MOBILE
+============================================================ */
+
+@media (max-width: 800px) {
+
+    .post-item {
+        flex-direction: column;
+    }
+
+    .post-thumb-link {
+        width: 100%;
+    }
+
+    .post-thumb {
+        width: 100%;
+        height: auto;
+    }
+
+    .post-body {
+        padding: 12px;
+    }
 }

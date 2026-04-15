@@ -1,35 +1,101 @@
-/* ========================
-   FONTS
-======================== */
-@font-face { font-family: 'IsabellaStd'; src: url('fonts/IsabellaStd.woff2') format('woff2'); }
-@font-face { font-family: 'PPNikkeiJournal-Light'; src: url('fonts/PPNikkeiJournal-Light.woff2') format('woff2'); }
-@font-face { font-family: 'PPNikkeiJournal-LightItalic'; src: url('fonts/PPNikkeiJournal-LightItalic.woff2') format('woff2'); }
-@font-face { font-family: 'CovikSansDemo'; src: url('fonts/CovikSansDemo-Regular.woff2') format('woff2'); }
-@font-face { font-family: 'Monaako-Script'; src: url('fonts/Monaako-Script.woff2') format('woff2'); }
+/* ============================================================
+   STYLE.CSS — Global stylesheet for Kafkand.net
+   Sections:
+   1. FONTS
+   2. RESET
+   3. BODY
+   4. HEADER
+   5. MAIN PAGE WRAPPER
+   6. SIDE PANEL
+   7. BLOCKS
+   8. SPECIAL TEXT (Monaako titles)
+   9. PRIMARY PANEL
+   10. WELCOME / INTRO SECTION
+   11. FEATURED IMAGE
+   12. FEATURED CONTENT (thumbnails)
+   13. MOBILE-ONLY ELEMENTS
+   14. RESPONSIVE / MOBILE
+============================================================ */
 
-/* ========================
-   RESET
-======================== */
-* { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0; }
 
-/* ========================
-   BODY
-======================== */
+/* ============================================================
+   1. FONTS
+============================================================ */
+
+/* Body / Standard text */
+@font-face {
+    font-family: 'PPNikkeiJournal-Light';
+    src: url('fonts/PPNikkeiJournal-Light.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'PPNikkeiJournal-LightItalic';
+    src: url('fonts/PPNikkeiJournal-LightItalic.woff2') format('woff2');
+}
+
+/* Bold body text (used in place of a true bold weight) */
+@font-face {
+    font-family: 'PPNikkeiJournal-Regular';
+    src: url('fonts/PPNikkeiJournal-Regular.woff2') format('woff2'),
+         url('fonts/PPNikkeiJournal-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'PPNikkeiJournal-RegularItalic';
+    src: url('fonts/PPNikkeiJournal-RegularItalic.woff2') format('woff2');
+}
+
+/* Header / Title text (standard) */
+@font-face {
+    font-family: 'CovikSansDemo';
+    src: url('fonts/CovikSansDemo-Regular.woff2') format('woff2');
+}
+
+/* Special Header 1 */
+@font-face {
+    font-family: 'Monaako-Script';
+    src: url('fonts/Monaako-Script.woff2') format('woff2');
+}
+
+/* Special Header 2 */
+@font-face {
+    font-family: 'IsabellaStd';
+    src: url('fonts/IsabellaStd.woff2') format('woff2');
+}
+
+
+/* ============================================================
+   2. RESET
+============================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+}
+
+
+/* ============================================================
+   3. BODY
+============================================================ */
+
 body {
     font-family: 'PPNikkeiJournal-Light', sans-serif;
-    background: #efe5d7;
-    color: #222;
+    background: #eee4d6;
+    color: #49443e;
     line-height: 1.65;
 }
 
-/* ========================
-   HEADER
-======================== */
+
+/* ============================================================
+   4. HEADER
+============================================================ */
+
 .header-wrapper {
     width: 800px;
     max-width: 80%;
     margin: 30px auto 0 auto;
 }
+
 .header-image {
     width: 100%;
     height: 220px;
@@ -37,9 +103,11 @@ body {
     object-fit: cover;
 }
 
-/* ========================
-   MAIN PAGE WRAPPER
-======================== */
+
+/* ============================================================
+   5. MAIN PAGE WRAPPER
+============================================================ */
+
 .page-wrapper {
     display: flex;
     justify-content: center;
@@ -50,9 +118,11 @@ body {
     margin: 10px auto 0 auto;
 }
 
-/* ========================
-   SIDE PANEL
-======================== */
+
+/* ============================================================
+   6. SIDE PANEL
+============================================================ */
+
 .side-panel {
     width: 149px;
     display: flex;
@@ -61,16 +131,7 @@ body {
     align-self: stretch;
 }
 
-.block {
-    background-color: #f2ece0;
-    padding: 10px;
-}
-
-/* Sitemap block */
-.sitemap { height: 181px; }
-.sitemap h2 { margin-bottom: 5px; }
-
-/* Menu buttons */
+/* Menu link lists (sitemap) */
 .menu {
     list-style: none;
     display: flex;
@@ -78,6 +139,7 @@ body {
     gap: 5px;
     padding: 0 10px;
 }
+
 .menu li a {
     display: block;
     width: 100%;
@@ -87,17 +149,43 @@ body {
     text-decoration: none;
     font-family: 'CovikSansDemo', sans-serif;
     font-size: 11px;
-    color: #222;
+    color: #49443e;
     transition: color 0.3s;
 }
-.menu li a:hover { color: #665d53; }
 
-/* Changelog block */
-.changelog { flex-grow: 1; }
+.menu li a:hover {
+    color: #665d53;
+}
 
-/* ========================
-   SPECIAL TEXT (Monaako) for titles
-======================== */
+
+/* ============================================================
+   7. BLOCKS
+   Generic background containers used in panels
+============================================================ */
+
+.block {
+    background-color: #f1ebdf;
+    padding: 10px;
+}
+
+.sitemap {
+    height: 181px;
+}
+
+.sitemap h2 {
+    margin-bottom: 5px;
+}
+
+.changelog {
+    flex-grow: 1;
+}
+
+
+/* ============================================================
+   8. SPECIAL TEXT
+   Monaako-Script used for block/menu titles (Sitemap, Changelog, etc.)
+============================================================ */
+
 .special-text {
     font-family: 'Monaako-Script', cursive;
     font-size: 20pt;
@@ -106,9 +194,11 @@ body {
     font-weight: normal;
 }
 
-/* ========================
-   PRIMARY PANEL
-======================== */
+
+/* ============================================================
+   9. PRIMARY PANEL
+============================================================ */
+
 .primary-panel {
     width: 641px;
     display: flex;
@@ -116,14 +206,17 @@ body {
     gap: 10px;
 }
 
-/* ========================
-   WELCOME POST (.intro)
-======================== */
+
+/* ============================================================
+   10. WELCOME / INTRO SECTION
+============================================================ */
+
 .intro {
-    background-color: #f2ece0;
+    background-color: #f1ebdf;
     padding: 16px 45px 30px 45px;
     position: relative;
 }
+
 .intro .decorative {
     font-family: 'IsabellaStd', serif;
     font-size: 31px;
@@ -135,6 +228,7 @@ body {
     margin-bottom: -5px;
     text-align: center;
 }
+
 .intro p:not(.quote) {
     font-size: 13.5px;
     letter-spacing: -0.01em;
@@ -144,15 +238,24 @@ body {
     hyphens: auto;
     margin: 0;
 }
-.intro .corner { position: absolute; width: 45px; height: 45px; }
+
+/* Decorative corner images */
+.intro .corner {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+}
+
 .intro .corner-tl { top: 10px; left: 10px; }
 .intro .corner-tr { top: 10px; right: 10px; }
 .intro .corner-bl { bottom: 10px; left: 10px; }
 .intro .corner-br { bottom: 10px; right: 10px; }
 
-/* ========================
-   FEATURED IMAGE
-======================== */
+
+/* ============================================================
+   11. FEATURED IMAGE
+============================================================ */
+
 .featured-image img {
     width: 100%;
     height: 63px;
@@ -160,15 +263,23 @@ body {
     object-fit: cover;
 }
 
-/* ========================
-   FEATURED CONTENT (Thumbnails using Grid)
-======================== */
+
+/* ============================================================
+   12. FEATURED CONTENT (thumbnails)
+============================================================ */
+
 .featured-content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 11px;
 }
-.thumb-link { display: block; width: 100%; height: 183px; }
+
+.thumb-link {
+    display: block;
+    width: 100%;
+    height: 183px;
+}
+
 .thumb-link img.thumb {
     width: 100%;
     height: 100%;
@@ -177,28 +288,34 @@ body {
     border: 2px solid transparent;
     transition: border 0.2s;
 }
-.thumb-link img.thumb:hover { border: 2px solid #665d53; }
 
-/* ========================
-   MOBILE-ONLY ELEMENTS (default hidden)
-======================== */
+.thumb-link img.thumb:hover {
+    border: 2px solid #665d53;
+}
+
+
+/* ============================================================
+   13. MOBILE-ONLY ELEMENTS (hidden by default on desktop)
+============================================================ */
+
 .mobile-nav,
-.mobile-changelog { display: none; }
+.mobile-changelog {
+    display: none;
+}
 
-/* ========================
-   MOBILE OPTIMIZATIONS
-======================== */
+
+/* ============================================================
+   14. RESPONSIVE / MOBILE
+============================================================ */
+
 @media (max-width: 800px) {
 
-    /* ========================
-       PAGE WRAPPER & PRIMARY PANEL
-    ======================== */
     .page-wrapper {
         flex-direction: column;
         width: 100%;
         max-width: 100%;
-        margin: 5px auto;          /* thin vertical margins */
-        padding: 0 10px;           /* uniform thin side padding */
+        margin: 5px auto;
+        padding: 0 10px;
         gap: 8px;
     }
 
@@ -208,21 +325,15 @@ body {
         box-sizing: border-box;
     }
 
-    /* ========================
-       SIDE PANEL: hidden on mobile
-    ======================== */
     .side-panel {
         display: none;
     }
 
-    /* ========================
-       SITE HEADER
-    ======================== */
     .header-wrapper {
         width: 100%;
         max-width: 100%;
-        margin: 15px auto 0 auto;                 /* top margin */
-        padding: 0 10px;           /* align sides with wrapper */
+        margin: 15px auto 0 auto;
+        padding: 0 10px;
         box-sizing: border-box;
     }
 
@@ -231,19 +342,16 @@ body {
         height: auto;
         display: block;
         object-fit: cover;
-        border-radius: 0;          /* optional, keep original look */
     }
 
-    /* ========================
-       HORIZONTAL NAVBAR: mobile-only
-    ======================== */
+    /* Horizontal navbar: mobile only */
     .mobile-nav {
         display: flex;
         justify-content: center;
         gap: 4px;
-        margin: 0 0 10px 0;        /* no top margin, margin below for spacing */
+        margin: 0 0 10px 0;
         padding: 4px 0;
-        background-color: #f2ece0;
+        background-color: #f1ebdf;
         border-radius: 6px;
         font-family: 'CovikSansDemo', sans-serif;
         font-size: 15px;
@@ -252,36 +360,27 @@ body {
 
     .mobile-nav a {
         text-decoration: none;
-        color: #222;
+        color: #49443e;
         padding: 4px 8px;
         transition: color 0.3s, background-color 0.2s;
     }
 
     .mobile-nav a:hover {
-        color: #fff;
+        color: #f1ebdf;
         background-color: #665d53;
         border-radius: 4px;
     }
 
-    /* ========================
-       INTRO SECTION
-    ======================== */
     .intro {
-        padding: 10px 10px 15px 10px;   /* align with header & navbar sides */
+        padding: 10px 10px 15px 10px;
     }
 
-    /* ========================
-       FEATURED IMAGE
-    ======================== */
     .featured-image img {
         width: 100%;
         height: auto;
         display: block;
     }
 
-    /* ========================
-       FEATURED CONTENT (Thumbnails)
-    ======================== */
     .featured-content {
         display: grid;
         grid-template-columns: 1fr;
@@ -298,9 +397,6 @@ body {
         height: auto;
     }
 
-    /* ========================
-       BOTTOM CHANGELOG: mobile-only
-    ======================== */
     .changelog {
         display: block;
         width: 100%;
